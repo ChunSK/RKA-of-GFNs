@@ -1,0 +1,137 @@
+\begin{filecontents*}{example.eps}
+%!PS-Adobe-3.0 EPSF-3.0
+%%BoundingBox: 19 19 221 221
+%%CreationDate: Mon Sep 29 1997
+%%Creator: programmed by hand (JK)
+%%EndComments
+gsave
+newpath
+  20 20 moveto
+  20 220 lineto
+  220 220 lineto
+  220 20 lineto
+closepath
+2 setlinewidth
+gsave
+  .4 setgray fill
+grestore
+stroke
+grestore
+\end{filecontents*}
+%
+\RequirePackage{fix-cm}
+%
+%\documentclass{svjour3}                     % onecolumn (standard format)
+%\documentclass[smallcondensed]{svjour3}     % onecolumn (ditto)
+\documentclass[smallextended]{svjour3}       % onecolumn (second format)
+%\documentclass[twocolumn]{svjour3}          % twocolumn
+%
+\smartqed  % flush right qed marks, e.g. at end of proof
+%
+
+
+%
+% \usepackage{mathptmx}      % use Times fonts if available on your TeX system
+%
+
+\usepackage{graphicx}
+\usepackage[english]{babel}
+\usepackage{blindtext}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{bm}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{theorem}
+\usepackage{amsfonts,amssymb}
+\usepackage{multicol}
+
+
+\usepackage{extarrows}
+
+\usepackage[inline]{enumitem}
+
+
+
+\bibliographystyle{splncs03}
+%
+
+
+\input{macros.tex}
+
+\renewcommand\theenumi{\roman{enumi}}
+\renewcommand\labelenumi{(\theenumi)}
+
+
+%
+% Insert the name of "your journal" with
+% \journalname{myjournal}
+%
+\begin{document}
+
+
+\title{Related-Key Security Analysis of Generalized Feistel Networks%\thanks{Grants or other notes
+%about the article that should go on the front page should be
+%placed here. General acknowledgments should be placed at the end of the article.}
+}
+
+
+\titlerunning{Related-Key Security Analysis of Generalized Feistel Networks}        % if too long for running head
+
+
+
+\author{... \and Chun Guo}
+
+
+\institute{Chun Guo \at
+				Key Laboratory of Cryptologic Technology and Information Security, Ministry of Education, Shandong University     \\     
+              School of Cyber Science and Technology, Shandong University      \\
+              \email{chun.guo@sdu.edu.cn} 
+%           \and
+%           Yaobin Shen \at
+%           	  \email{yb\_shen@sjtu.edu.cn}
+}
+
+\date{Received: date / Accepted: date}
+% The correct dates will be entered by the editor
+
+
+\maketitle
+
+\begin{abstract}
+We examine the related-key security of various generalized Feistel networks, including contracting, expanding, alternating Feistel, and Naor-Reingold construction. In detail,
+\begin{itemize}
+	\item Assuming using related-key secure round functions, we show that alternating key assignments are sufficient for contracting, expanding, and alternating Feistel networks. We also unveil the nearly optimal round complexities for the schemes that are sufficient for related-key CCA security.
+	\item Assuming using related-key secure AXU hashing (introduce by Wang et al., FSE 2016) and round functions, we prove that the Naor-Reingold construction is related-key secure.
+\end{itemize}
+Our results enable constructing efficient variable input length related-key secure SPRPs for various applications such as non malleable codes and temper resilience.
+
+\keywords{Blockcipher \and related-key \and Feistel networks}
+% \PACS{PACS code1 \and PACS code2 \and more}
+ \subclass{94A60 \and 68P25}
+\end{abstract}
+
+
+
+
+
+\input{chapters/ch1-introduction.tex}
+
+\input{chapters/ch2-preliminary.tex}
+
+\input{chapters/conclusion.tex}
+
+
+
+\section*{Acknowledgements}
+
+
+
+
+\bibliography{crypto/reference-set,crypto/abbrev1,crypto/crypto}
+
+
+
+\end{document}
