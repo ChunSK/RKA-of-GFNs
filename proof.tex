@@ -1,0 +1,296 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{amstext}
+\usepackage[mathscr]{eucal}
+\usepackage{bm}
+\usepackage{url}
+\usepackage{pifont}
+\usepackage{calc}
+\usepackage{float}
+\usepackage{latexsym}
+\usepackage{paralist}
+\usepackage{xspace}
+\usepackage{cancel}
+\usepackage{multicol}
+\usepackage{footmisc}
+%\usepackage[table]{xcolor}
+\usepackage[utf8]{inputenc}
+\usepackage[inline]{enumitem}
+
+\begin{document}
+\section{$m=kn$}
+\subsection{5-rounds}
+CCA Security : The 5-Round Contracting Feistel Construction\\
+We proved 5-round contracting feistel construction which can achieve CCA security under related-key attacks with the simple key assignments:$[1,2,2,1,2]$.\\
+\begin{equation}
+\frac{\Pr_{re}(\tau)}{\Pr_{id}(\tau)}\geq 1-( \frac{2q^{2}}{2^{n}}+\frac{3q}{2^{n}} +\frac{q^{2}}{2^{3n}})
+\end{equation}
+Proof:
+To prove Eq.(1),we fix a transcript $\tau=(\phi_{i},X_{1,i}[1,3n],X_{6,i}[1,3n]),i=1\cdots q$,then distinguish good and bad key with respect to $\tau$, and finally analyze the probability of the good key to get the advantage of this construction.\\
+
+First, we classify $\phi_{i}$, suppose that the quantity of $\phi^{(i)}$ is $\alpha$.\\
+$\mathcal{Q}_{1}={(\phi^{(1)},X_{11}[1,3n],X_{61}[1,3n]),\dots,(\phi^{(1)},X_{1q_{1}}[1,3n],X_{6q_{1}}[1,3n])}$ which has $q_{1}$ different input totally.\\
+$\mathcal{Q}_{2}={(\phi^{(2)},X_{12}[1,3n],X_{62}[1,3n]),\dots,(\phi^{(2)},X_{1q_{2}}[1,3n],X_{6q_{2}}[1,3n])}$    which has $q_{2}$ different input totally.\\
+\quad \quad $\vdots$ \\
+$\mathcal{Q}_{\alpha}={(\phi^{(\alpha)},X_{1\alpha}[1,3n],X_{6\alpha}[1,3n]),\dots,(\phi^{(\alpha)},X_{1q_{\alpha}}[1,3n],X_{6q_{\alpha}}[1,3n])}$ which has $q_{\alpha}$ different input totally.\\
+
+Suppose that there are $\alpha$ $\phi^{(i)}$ which can derive $\beta$ different $\mathcal{K}_{1}$: $\mathcal{K}_{1}^{(1)}$, $\mathcal{K}_{1}^{(2)}$, $\dots$,$\mathcal{K}_{1}^{(\beta)}$$(\beta\leq \alpha)$.\\
+Suppose that q Related-Key Oracle query constitute of $q_{1}^{\ast} \dots q_{\beta}^{\ast}$ inputs separately in $\beta$ different $\mathcal{K}_{1}$.\\
+
+Bad Keys are now defined as follows.\\
+Definition 1: $\mathcal{K}_{1}^{bad}$  for 5 Rounds
+with respect to $\tau$, $\mathcal{K}_{1}$  is {\it bad}, if at least one of the following conditions is fulfilled\\
+(B-1)there exists $i$ and $j$ such that $X_{2,i}[n+1,3n]$ =$X_{2,j}[n+1,3n],(i\neq j)$\\
+(B-2)there exists $i$ and $j$ such that $X_{2,i}[n+1,3n]$ =$X_{3,j}[n+1,3n]$\\
+(B-3)there exists $i$ and $j$ such that $X_{2,i}[n+1,3n]$ =$X_{5,j}[n+1,3n]$\\
+(B-4)there exists $i$ and $j$ such that $X_{3,i}[n+1,3n]$ =$X_{3,j}[n+1,3n]],(i\neq j)$\\
+(B-5)there exists $i$ and $j$ such that $X_{3,i}[n+1,3n]$ =$X_{5,j}[n+1,3n]$\\
+Otherwise we say $\mathcal{K}_{1}$ is {\it good}.\\
+
+Definition 2: $\mathcal{K}_{2}^{bad}$  for 5 Rounds
+with respect to $\tau$, $\mathcal{K}_{2}$  is {\it bad}, if at least one of the following conditions is fulfilled \\
+(B-1)there exists $i$ and $j$ such that $X_{2,i}[n+1,3n]$ =$X_{4,j}[n+1,3n]$\\
+(B-2)there exists $i$ and $j$ such that $X_{4,i}[n+1,3n]$ =$X_{4,j}[n+1,3n],(i\neq j)$\\
+Otherwise we say $\mathcal{K}_{2}$ is {\it good}.\\
+
+Now we analyze the situation of $\mathcal{K}_{1}^{bad}$.\\
+Firstly, we pay attention to (B-1). If $\mathcal{K}_{1,i}\neq\mathcal{K}_{1,j}$, the probability of the collision of X is $\frac{1}{2^{n}}$. If $\mathcal{K}_{1,i}=\mathcal{K}_{1,j}$ and $\phi^{(i)}\neq\phi^{(j)}$, because of the claw free, we don't need to think about the collision. Next we think about the situation of $\phi^{(i)}=\phi^{(j)}$. There are two possible situations $X_{1,i}[2n+1,3n]=X_{1,j}[2n+1,3n]$ and $X_{1,i}[2n+1,3n]\neq X_{1,j}[2n+1,3n]$. When $X_{1,i}[2n+1,3n]\neq X_{1,j}[2n+1,3n]$, there are definitely no collision.When $X_{1,i}[2n+1,3n]=X_{1,j}[2n+1,3n]$, we think about the collision of X.
+If $X_{1,i}[n+1,2n]=X_{1,j}[n+1,2n]$, because of the difference of $X[1,n]$, we can know that $X_{2,i}[2n+1,3n]\neq X_{2,j}[2n+1,3n]$. If $X_{1,i}[n+1,2n]\neq X_{1,j}[n+1,2n]$, we can get the formulation
+$\Pr[X_{2,i}[2n+1,3n]=X_{2,j}[2n+1,3n]]=\frac{1}{2^{n}}$.
+Further, the probability of the situation of (B-1) is $\frac{1}{2^{n}}$.
+
+Secondly, we think about (B-2),(B-3),(B-5). This is a random collision.
+So we have the formulation.
+$\Pr[X_{2,i}[n+1,3n]=X_{3,j}[n+1,3n]]=\frac{1}{2^{2n}}$.\\
+$\Pr[X_{2,i}[n+1,3n]=X_{5,j}[n+1,3n]]=\frac{1}{2^{2n}}$.\\
+$\Pr[X_{3,i}[n+1,3n]=X_{5,j}[n+1,3n]]=\frac{1}{2^{2n}}$.\\
+
+Finally, we pay attention to (B-4).\\
+When $X_{1,i}[n+1,2n]=X_{1,j}[n+1,2n]$ and $X_{1,i}[2n+1,3n]=X_{1,j}[2n+1,3n]$, because of the difference of L,we can know that $X_{2,i}[2n+1,3n]\neq X_{2,j}[2n+1,3n]$.So $X_{3,i}[n+1,3n]\neq X_{3,j}[n+1,3n]$. \\
+When $X_{1,i}[n+1,2n]\neq X_{1,j}[n+1,2n]$ and $X_{1,i}[2n+1,3n]=X_{1,j}[2n+1,3n]$, then $\Pr[X_{2,i}[2n+1,3n]=X_{2,j}[2n+1,3n]]=\frac{1}{2^{n}}$, because of the difference of $X_{1,i}[n+1,2n]$,we can know that if $X_{2,i}[2n+1,3n]=X_{2,j}[2n+1,3n]$,then there is no collision of Y.\\
+When $X_{1,i}[n+1,2n]=X_{1,j}[n+1,2n]$ and $X_{1,i}[2n+1,3n]\neq X_{1,j}[2n+1,3n]$, then $\Pr[X_{2,i}[2n+1,3n]=X_{2,j}[2n+1,3n]]=\frac{1}{2^{n}}$. Further,if $X_{2,i}[2n+1,3n]=X_{2,j}[2n+1,3n]$,then $\Pr[X_{3,i}[2n+1,3n]=X_{3,j}[2n+1,3n]]=\frac{1}{2^{n}}$.So $\Pr[X_{3,i}[n+1,3n]=X_{3,j}[n+1,3n]]=\frac{1}{2^{2n}}$\\
+When$X_{1,i}[n+1,2n]\neq X_{1,j}[n+1,2n]$ and $X_{1,i}[2n+1,3n]\neq X_{1,j}[2n+1,3n]$, we can get the probability is $$\Pr[X_{3,i}[n+1,3n]=X_{3,j}[n+1,3n]]=\frac{1}{2^{2n}}$$
+So the probability of the situation of (B-4) is $\frac{2}{2^{2n}}$.\\
+For $\mathcal{K}_{1}^{bad}$,we can get the probability:\\
+$\Pr[\mathcal{K}_{1}^{bad}]\leq (\frac{1}{2^{n}}+\frac{5}{2^{2n}})q^{2}$\\
+
+For $\mathcal{K}_{2}^{bad}$,we can get the probability:\\
+$\Pr[\mathcal{K}_{2}^{bad}]\leq (\frac{1}{2^{n}}+\frac{1}{2^{2n}})q^{2}$
+
+Lowering Bounding the Probability for Good Keys\\
+We now lower bound the probability for good keys.\\
+$\Pr_{re}[\tau]=(1-Pr[\mathcal{K}_{1}^{bad}])(\frac{1}{2^{n}})^{3q}\times(1-\frac{1}{2^{n}})^{3q}
+(1-\Pr[\mathcal{K}_{2}^{bad}])$
+
+\begin{align*}
+\frac{\Pr_{re}(\tau)}{\Pr_{id}(\tau)}&= (1-\Pr[\mathcal{K}_{1}^{bad}])(\frac{1}{2^{n}})^{3q}\times(1-\frac{1}{2^{n}})^{3q}\times
+(1-\Pr[\mathcal{K}_{2}^{bad}]) / \prod_{i=0}^{\alpha}\frac{1}{(2^{3n})_{q_{i}}}\\
+&\geq (1-(\frac{1}{2^{n}}+\frac{5}{2^{2n}})q^{2})(\frac{1}{2^{n}})^{3q}\times(1-\frac{1}{2^{n}})^{3q}\times
+(1-(\frac{1}{2^{n}}+\frac{1}{2^{2n}})q^{2})(2^{3n}-q)^{q}\\
+&\geq(1-(\frac{1}{2^{n}}+\frac{5}{2^{2n}})q^{2})(1-(\frac{1}{2^{n}}+\frac{1}{2^{2n}})q^{2})(1-\frac{3q}{2^{n}})(1-\frac{q^{2}}{2^{3n}})\\
+&\geq 1-( \frac{2q^{2}}{2^{n}}+\frac{3q}{2^{n}} +\frac{q^{2}}{2^{3n}})
+\end{align*}
+So if $q \ll 2^{\frac{n}{2}}$,we can get this construction is CCA-security.
+
+
+\subsection{6-rounds}
+We proved 6-round contracting feistel construction which can achieve CCA security under related-key attacks with the simple key assignments:$[1,2,1,2,1,2]$.\\
+\begin{equation}
+\frac{\Pr_{re}(\tau)}{Pr_{id}(\tau)}\geq 1-( \frac{2q^{2}}{2^{n}}+\frac{3q}{2^{n}} +\frac{q^{2}}{2^{3n}})
+\end{equation}
+Proof:
+To prove Eq.(2),we distinguish good and bad key with respect to $\tau$, and finally analyze the probability of the good key to get the advantage of this construction.\\
+
+First, we classify $\phi_{i}$, suppose that the quantity of $\phi^{(i)}$ is $\alpha$.\\
+$\mathcal{Q}_{1}={(\phi^{(1)},X_{11}[1,4n],X_{71}[1,4n]),\dots,(\phi^{(1)},X_{1q_{1}}[1,4n],X_{7q_{1}}[1,4n])}$ which has $q_{1}$ different input totally.\\
+$\mathcal{Q}_{2}={(\phi^{(2)},X_{12}[1,3n],X_{72}[1,4n]),\dots,(\phi^{(2)},X_{1q_{2}}[1,4n],X_{7q_{2}}[1,4n])}$    which has $q_{2}$ different input totally.\\
+\quad \quad $\vdots$ \\
+$\mathcal{Q}_{\alpha}={(\phi^{(\alpha)},X_{1\alpha}[1,4n],X_{7\alpha}[1,4n]),\dots,(\phi^{(\alpha)},X_{1q_{\alpha}}[1,4n],X_{7q_{\alpha}}[1,4n])}$ which has $q_{\alpha}$ different input totally.\\
+
+Suppose that there are $\alpha$ $\phi^{(i)}$ which can derive $\beta$ different $\mathcal{K}_{1}$: $\mathcal{K}_{1}^{(1)}$, $\mathcal{K}_{1}^{(2)}$, $\dots$,$\mathcal{K}_{1}^{(\beta)}$$(\beta\leq \alpha)$.\\
+Suppose that q Related-Key Oracle query constitute of $q_{1}^{\ast} \dots q_{\beta}^{\ast}$ inputs separately in $\beta$ different $\mathcal{K}_{1}$.\\
+
+Bad Keys are now defined as follows.\\
+Definition 1: $\mathcal{K}_{1}^{bad}$  for 6 Rounds
+with respect to $\tau$, $\mathcal{K}_{1}$  is {\it bad}, if at least one of the following conditions is fulfilled\\
+(B-1)there exists $i$ and $j$ such that $X_{2,i}[n+1,4n]$ =$X_{2,j}[n+1,4n],(i\neq j)$\\
+(B-2)there exists $i$ and $j$ such that $X_{2,i}[n+1,4n]$ =$X_{4,j}[n+1,4n]$\\
+(B-3)there exists $i$ and $j$ such that $X_{2,i}[n+1,4n]$ =$X_{6,j}[n+1,4n]$\\
+(B-4)there exists $i$ and $j$ such that $X_{4,i}[n+1,4n]$ =$X_{4,j}[n+1,4n],(i\neq j)$\\
+(B-5)there exists $i$ and $j$ such that $X_{4,i}[n+1,4n]$ =$X_{6,j}[n+1,4n]$\\
+Otherwise we say $\mathcal{K}_{1}$ is {\it good}.\\
+
+Definition 2: $\mathcal{K}_{2}^{bad}$  for 6 Rounds
+with respect to $\tau$, $\mathcal{K}_{2}$  is {\it bad}, if at least one of the following conditions is fulfilled \\
+(B-1)there exists $i$ and $j$ such that $X_{5,i}[n+1,4n]$ =$X_{5,j}[n+1,4n],(i\neq j)$\\
+(B-2)there exists $i$ and $j$ such that $X_{5,i}[n+1,4n]$ =$X_{3,j}[n+1,4n]$\\
+(B-3)there exists $i$ and $j$ such that $X_{5,i}[n+1,4n]$ =$X_{1,j}[n+1,4n]$\\
+(B-4)there exists $i$ and $j$ such that $X_{3,i}[n+1,4n]$ =$X_{3,j}[n+1,4n],(i\neq j)$\\
+(B-5)there exists $i$ and $j$ such that $X_{3,i}[n+1,4n]$ =$X_{1,j}[n+1,4n]$\\
+Otherwise we say $\mathcal{K}_{2}$ is {\it good}.\\
+
+For $\mathcal{K}_{1}^{bad}$,we can get the probability:\\
+$\Pr[\mathcal{K}_{1}^{bad}]\leq (\frac{5}{2^{n}})q^{2}$\\
+
+For $\mathcal{K}_{2}^{bad}$,we can get the probability:\\
+$\Pr[\mathcal{K}_{2}^{bad}]\leq (\frac{5}{2^{n}})q^{2}$\\
+Lowering Bounding the Probability for Good Keys\\
+We now lower bound the probability for good keys.\\
+$\Pr_{re}[\tau]=(1-\Pr[\mathcal{K}_{1}^{bad}])(\frac{1}{2^{n}})^{4q}\times(1-\frac{1}{2^{n}})^{4q}
+(1-\Pr[\mathcal{K}_{2}^{bad}])$
+
+\begin{align*}
+\frac{\Pr_{re}(\tau)}{\Pr_{id}(\tau)}&= (1-\Pr[\mathcal{K}_{1}^{bad}])\times(\frac{1}{2^{n}})^{4q}\times(1-\frac{1}{2^{n}})^{4q}\times
+(1-\Pr[\mathcal{K}_{2}^{bad}]) / \prod_{i=0}^{\alpha}\frac{1}{(2^{4n})_{q_{i}}}\\
+&\geq (1-\frac{5q^{2}}{2^{n}})\times(\frac{1}{2^{n}})^{4q}\times(1-\frac{1}{2^{n}})^{4q}\times
+(1-\frac{5q^{2}}{2^{n}})(2^{4n}-q)^{q}\\
+&\geq(1-\frac{10q^{2}}{2^{n}})(1-\frac{4q}{2^{n}})(1-\frac{q^{2}}{2^{4n}})\\
+&\geq 1-( \frac{10q^{2}}{2^{n}}+\frac{4q}{2^{n}} +\frac{q^{2}}{2^{4n}})
+\end{align*}
+So if $q \ll 2^{\frac{n}{2}}$,we can get this construction is CCA-security.\\
+\\
+\\
+\\
+
+\section{$m=kn+r$}
+
+\subsection{k is even}
+Based on the above discussion, we expand this issue to general situation. When $\frac{m}{n}=k+r, k$ is a integer, we discuss the CCA security of k+3+1 rounds with respect to odd and even rounds separately.\\
+
+Firstly, When k is even, we talk about the CCA security under related-key attacks with the simple key assignments:$[1,2,1,2,\dots,1,2]$.\\
+
+\begin{equation}
+\frac{\Pr_{re}(\tau)}{Pr_{id}(\tau)}\geq 1-( \frac{q^{2}}{2^{(k+2)n}}+\frac{(k+2)q}{2^{n}} +\frac{(k^{2}+10k+16)q^{2}}{2^{n+2}})
+\end{equation}
+
+Proof:
+To prove Eq.(3),we distinguish good and bad key with respect to $\tau$, and finally analyze the probability of the good key to get the advantage of this construction.\\
+\\
+First, we classify $\phi_{i}$, suppose that the quantity of $\phi^{(i)}$ is $\alpha$.\\
+$\mathcal{Q}_{1}={(\phi^{(1)},X_{11}[1,(k+1)n],X_{(k+4)1}[1,(k+1)n]),\dots,(\phi^{(1)},X_{1q_{1}}[1,(k+1)n],X_{(k+4)q_{1}}[1,(k+1)n])}$ which has $q_{1}$ different input totally.\\
+$\mathcal{Q}_{2}={(\phi^{(2)},X_{12}[1,(k+1)n],X_{(k+4)2}[1,(k+1)n]),\dots,(\phi^{(2)},X_{1q_{2}}[1,(k+1)n],X_{(k+4)q_{2}}[1,(k+1)n])}$    which has $q_{2}$ different input totally.\\
+\quad \quad $\vdots$ \\
+$\mathcal{Q}_{\alpha}={(\phi^{(\alpha)},X_{1\alpha}[1,(k+1)n],X_{(k+4)\alpha}[1,(k+1)n]),\dots,(\phi^{(\alpha)},X_{1q_{\alpha}}[1,(k+1)n],X_{(k+4)q_{\alpha}}[1,(k+1)n])}$ which has $q_{\alpha}$ different input totally.\\
+
+Suppose that there are $\alpha$ different $\phi^{(i)}$ which can derive $\beta$ different $\mathcal{K}_{1}$: $\mathcal{K}_{1}^{(1)}$, $\mathcal{K}_{1}^{(2)}$, $\dots$,$\mathcal{K}_{1}^{(\beta)}$$(\beta\leq \alpha)$.\\\\
+Suppose that q Related-Key Oracle query constitute of $q_{1}^{\ast} \dots q_{\beta}^{\ast}$ inputs separately in $\beta$ different $\mathcal{K}_{1}$.\\
+\\
+
+Bad Keys are now defined as follows.\\
+Definition 1: $\mathcal{K}_{1}^{bad}$  for k+3+1 Rounds
+with respect to $\tau$, $\mathcal{K}_{1}$  is {\it bad}, if at least one of the following conditions is fulfilled\\
+(B-1)there exists $i$ and $j$ such that $X_{2,i}[n+1,(k+1)n+r]$=$X_{2,j}[n+1,(k+1)n+r],(i\neq j)$\\
+(B-2)there exists $i$ and $j$ such that $X_{2,i}[n+1,(k+1)n+r]$=$X_{4,j}[n+1,(k+1)n+r]$\\
+\dots\\
+(B-$\frac{k+4}{2}$)there exists $i$ and $j$ such that $X_{2,i}[n+1,(k+1)n+r]$=$X_{k+3,j}[n+1,(k+1)n+r]$\\
+(B-$\frac{k+4}{2}$+1)there exists $i$ and $j$ such that $X_{4,i}[n+1,(k+1)n+r]$=$X_{4,j}[n+1,(k+1)n+r],(i\neq j)$\\
+(B-$\frac{k+4}{2}$+2)there exists $i$ and $j$ such that $X_{4,i}[n+1,(k+1)n+r]$=$X_{6,j}[n+1,(k+1)n+r]$\\
+\dots \\
+(B-$k+3$)there exists $i$ and $j$ such that $X_{4,i}[n+1,(k+1)n+r]$=$X_{k+4,j}[n+1,(k+1)n+r]$\\
+\dots \\
+(B-$\frac{k^{2}+10k+8}{8}$)there exists $i$ and $j$ such that $X_{k+2,i}[n+1,(k+1)n+r]$=$X_{k+2,j}[n+1,(k+1)n+r]$\\
+(B-$\frac{k^{2}+10k+16}{8}$)there exists $i$ and $j$ such that $X_{k+2,i}[n+1,(k+1)n+r]$=$X_{k+4,j}[n+1,(k+1)n+r]$\\
+Otherwise we say $\mathcal{K}_{1}$ is {\it good}.\\
+
+For $\mathcal{K}_{1}^{bad}$,we can get the probability:\\
+$\Pr[\mathcal{K}_{1}^{bad}]\leq (\frac{k^{2}+10k+16}{8\times2^{n}})q^{2}$\\
+
+For $\mathcal{K}_{2}^{bad}$, we have similar results:\\
+$\Pr[\mathcal{K}_{2}^{bad}]\leq (\frac{k^{2}+10k+16}{8\times2^{n}})q^{2}$\\
+
+Lowering Bounding the Probability for Good Keys\\
+We now lower bound the probability for good keys.\\
+$\Pr_{re}[\tau]=(1-\Pr[\mathcal{K}_{1}^{bad}])(\frac{1}{2^{(k+1)n+r}})^{q}\times(1-\frac{1}{2^{n}})^{(k+2)q}
+(1-\Pr[\mathcal{K}_{2}^{bad}])$
+
+\begin{align*}
+\frac{\Pr_{re}(\tau)}{\Pr_{id}(\tau)}&= (1-\Pr[\mathcal{K}_{1}^{bad}])\times(\frac{1}{2^{(k+1)n+r}})^{q}\times(1-\frac{1}{2^{n}})^{(k+2)q}\times
+(1-\Pr[\mathcal{K}_{2}^{bad}]) / \prod_{i=0}^{\alpha}\frac{1}{(2^{(k+1)n+r})_{q_{i}}}\\
+&\geq (1-\frac{k^{2}+10k+16}{8\times2^{n}}q^{2})\times(\frac{1}{2^{(k+1)n+r}})^{q}\times(1-\frac{1}{2^{n}})^{(k+2)q}\times
+(1-\frac{k^{2}+10k+16}{8\times2^{n}}q^{2})(2^{(k+1)n+r}-q)^{q}\\
+&\geq 1-( \frac{q^{2}}{2^{(k+2)n}}+\frac{(k+2)q}{2^{n}} +\frac{(k^{2}+10k+16)q^{2}}{2^{n+2}})
+\end{align*}
+So if $q \ll 2^{\frac{n}{2}}$,we can get this construction is CCA-security.\\
+
+
+\subsection{k is odd}
+
+Secondly, When k is odd, we talk about the CCA security under related-key attacks with the simple key assignments:$[1,2,2,1,2,\dots,1,2]$.\\
+
+\begin{equation}
+\frac{\Pr_{re}(\tau)}{Pr_{id}(\tau)}\geq 1-( \frac{q^{2}}{2^{(k+1)n+r}}+\frac{(k+2)q}{2^{n}} +\frac{(k^{2}+12k+27)q^{2}}{2^{n+2}})
+\end{equation}
+
+Proof:
+To prove Eq.(4),we distinguish good and bad key with respect to $\tau$, and finally analyze the probability of the good key to get the advantage of this construction.\\
+\\
+First, we classify $\phi_{i}$, suppose that the quantity of $\phi^{(i)}$ is $\alpha$.\\
+$\mathcal{Q}_{1}={(\phi^{(1)},X_{11}[1,(k+1)n],X_{(k+4)1}[1,(k+1)n]),\dots,(\phi^{(1)},X_{1q_{1}}[1,(k+1)n],X_{(k+4)q_{1}}[1,(k+1)n])}$ which has $q_{1}$ different input totally.\\
+$\mathcal{Q}_{2}={(\phi^{(2)},X_{12}[1,(k+1)n],X_{(k+4)2}[1,(k+1)n]),\dots,(\phi^{(2)},X_{1q_{2}}[1,(k+1)n],X_{(k+4)q_{2}}[1,(k+1)n])}$    which has $q_{2}$ different input totally.\\
+\quad \quad $\vdots$ \\
+$\mathcal{Q}_{\alpha}={(\phi^{(\alpha)},X_{1\alpha}[1,(k+1)n],X_{(k+4)\alpha}[1,(k+1)n]),\dots,(\phi^{(\alpha)},X_{1q_{\alpha}}[1,(k+1)n],X_{(k+4)q_{\alpha}}[1,(k+1)n])}$ which has $q_{\alpha}$ different input totally.\\
+
+Suppose that there are $\alpha$ different $\phi^{(i)}$ which can derive $\beta$ different $\mathcal{K}_{1}$: $\mathcal{K}_{1}^{(1)}$, $\mathcal{K}_{1}^{(2)}$, $\dots$,$\mathcal{K}_{1}^{(\beta)}$$(\beta\leq \alpha)$.\\\\
+Suppose that q Related-Key Oracle query constitute of $q_{1}^{\ast} \dots q_{\beta}^{\ast}$ inputs separately in $\beta$ different $\mathcal{K}_{1}$.\\
+
+
+Bad Keys are now defined as follows.\\
+Definition 1: $\mathcal{K}_{1}^{bad}$  for k+3+1 Rounds
+with respect to $\tau$, $\mathcal{K}_{1}$  is {\it bad}, if at least one of the following conditions is fulfilled\\
+(B-1)there exists $i$ and $j$ such that $X_{2,i}[n+1,(k+1)n+r]$=$X_{2,j}[n+1,(k+1)n+r],(i\neq j)$\\
+(B-2)there exists $i$ and $j$ such that $X_{2,i}[n+1,(k+1)n+r]$=$X_{3,j}[n+1,(k+1)n+r]$\\
+\dots\\
+(B-$\frac{k+5}{2}$)there exists $i$ and $j$ such that $X_{2,i}[n+1,(k+1)n+r]$=$X_{k+4,j}[n+1,(k+1)n+r]$\\
+(B-$\frac{k+5}{2}$+1)there exists $i$ and $j$ such that $X_{3,i}[n+1,(k+1)n+r]$=$X_{3,j}[n+1,(k+1)n+r],(i\neq j)$\\
+(B-$\frac{k+5}{2}$+2)there exists $i$ and $j$ such that $X_{3,i}[n+1,(k+1)n+r]$=$X_{5,j}[n+1,(k+1)n+r]$\\
+\dots \\
+(B-$k+4$)there exists $i$ and $j$ such that $X_{3,i}[n+1,(k+1)n+r]$=$X_{k+4,j}[n+1,(k+1)n+r]$\\
+\dots \\
+(B-$\frac{k^{2}+12k+19}{8}$)there exists $i$ and $j$ such that $X_{k+2,i}[n+1,(k+1)n+r]$=$X_{k+2,j}[n+1,(k+1)n+r]$\\
+(B-$\frac{k^{2}+12k+27}{8}$)there exists $i$ and $j$ such that $X_{k+2,i}[n+1,(k+1)n+r]$=$X_{k+4,j}[n+1,(k+1)n+r]$\\
+
+Otherwise we say $\mathcal{K}_{1}$ is {\it good}.\\
+For $\mathcal{K}_{1}^{bad}$,we can get the probability:\\
+$\Pr[\mathcal{K}_{1}^{bad}]\leq (\frac{k^{2}+12k+27}{8\times2^{n}})q^{2}$\\
+
+Bad Keys are now defined as follows.\\
+Definition 2: $\mathcal{K}_{2}^{bad}$  for k+3+1 Rounds
+with respect to $\tau$, $\mathcal{K}_{2}$  is {\it bad}, if at least one of the following conditions is fulfilled\\
+(B-1)there exists $i$ and $j$ such that $X_{k+3,i}[n+1,(k+1)n+r]$=$X_{k+3,j}[n+1,(k+1)n+r],(i\neq j)$\\
+(B-2)there exists $i$ and $j$ such that $X_{k+3,i}[n+1,(k+1)n+r]$=$X_{k+1,j}[n+1,(k+1)n+r]$\\
+\dots\\
+(B-$\frac{k+3}{2}$)there exists $i$ and $j$ such that $X_{k+3,i}[n+1,(k+1)n+r]$=$X_{1,j}[n+1,(k+1)n+r]$\\
+(B-$\frac{k+3}{2}$+1)there exists $i$ and $j$ such that $X_{k+1,i}[n+1,(k+1)n+r]$=$X_{k+1,j}[n+1,(k+1)n+r],(i\neq j)$\\
+(B-$\frac{k+3}{2}$+2)there exists $i$ and $j$ such that $X_{k+1,i}[n+1,(k+1)n+r]$=$X_{k-1,j}[n+1,(k+1)n+r]$\\
+\dots \\
+(B-$k+2$)there exists $i$ and $j$ such that $X_{k+1,i}[n+1,(k+1)n+r]$=$X_{1,j}[n+1,(k+1)n+r]$\\
+\dots \\
+(B-$\frac{k^{2}+8k-1}{8}$)there exists $i$ and $j$ such that $X_{4,i}[n+1,(k+1)n+r]$=$X_{4,j}[n+1,(k+1)n+r]$\\
+(B-$\frac{k^{2}+8k+7}{8}$)there exists $i$ and $j$ such that $X_{4,i}[n+1,(k+1)n+r]$=$X_{1,j}[n+1,(k+1)n+r]$\\
+(B-$\frac{k^{2}+8k+7}{8}$+1)there exists $i$ and $j$ such that $X_{3,i}[n+1,(k+1)n+r]$=$X_{2,j}[n+1,(k+1)n+r]$\\
+(B-$\frac{k^{2}+8k+7}{8}$+2)there exists $i$ and $j$ such that $X_{3,i}[n+1,(k+1)n+r]$=$X_{3,j}[n+1,(k+1)n+r],(i\neq j)$\\
+\dots\\
+(B-$\frac{k^{2}+12k+27}{8}$)there exists $i$ and $j$ such that $X_{3,i}[n+1,(k+1)n+r]$=$X_{k+4,j}[n+1,(k+1)n+r]$\\
+Otherwise we say $\mathcal{K}_{2}$ is {\it good}.\\
+For $\mathcal{K}_{2}^{bad}$,we can get the probability:\\
+$\Pr[\mathcal{K}_{2}^{bad}]\leq (\frac{k^{2}+12k+27}{8\times2^{n}})q^{2}$\\
+
+Lowering Bounding the Probability for Good Keys\\
+We now lower bound the probability for good keys.\\
+$\Pr_{re}[\tau]=(1-\Pr[\mathcal{K}_{1}^{bad}])(\frac{1}{2^{(k+1)n+r}})^{q}\times(1-\frac{1}{2^{n}})^{(k+2)q}
+(1-\Pr[\mathcal{K}_{2}^{bad}])$
+
+\begin{align*}
+\frac{\Pr_{re}(\tau)}{\Pr_{id}(\tau)}&= (1-\Pr[\mathcal{K}_{1}^{bad}])\times(\frac{1}{2^{(k+1)n+r}})^{q}\times(1-\frac{1}{2^{n}})^{(k+2)q}\times
+(1-\Pr[\mathcal{K}_{2}^{bad}]) / \prod_{i=0}^{\alpha}\frac{1}{(2^{(k+1)n+r})_{q_{i}}}\\
+&\geq (1-\frac{k^{2}+12k+27}{8\times2^{n}}q^{2})\times(\frac{1}{2^{(k+1)n+r}})^{q}\times(1-\frac{1}{2^{n}})^{(k+2)q}\times
+(1-\frac{k^{2}+12k+27}{8\times2^{n}}q^{2})(2^{(k+1)n+r}-q)^{q}\\
+ &\geq 1-( \frac{q^{2}}{2^{(k+1)n+r}}+\frac{(k+2)q}{2^{n}} +\frac{(k^{2}+12k+27)q^{2}}{2^{n+2}})
+\end{align*}
+So if $q \ll 2^{\frac{n}{2}}$,we can get this construction is CCA-security.\\
+\end{document}
