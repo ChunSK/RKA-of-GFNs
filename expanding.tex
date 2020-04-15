@@ -1,0 +1,77 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{amstext}
+\usepackage[mathscr]{eucal}
+\usepackage{bm}
+\usepackage{url}
+\usepackage{pifont}
+\usepackage{calc}
+\usepackage{float}
+\usepackage{latexsym}
+\usepackage{paralist}
+\usepackage{xspace}
+\usepackage{cancel}
+\usepackage{multicol}
+\usepackage{footmisc}
+%\usepackage[table]{xcolor}
+\usepackage[utf8]{inputenc}
+\usepackage[inline]{enumitem}
+
+\begin{document}
+\section{$m=kn$}
+\subsection{6-rounds}
+We proved 6-round expanding feistel construction which can achieve CCA security under related-key attacks with the simple key assignments:$[1,2,1,2,1,2]$.\\
+\begin{equation}
+\frac{\Pr_{re}(\tau)}{Pr_{id}(\tau)}\geq 1-(\frac{9q^{2}}{2^{n}}+\frac{q^{2}}{2^{3n}})
+\end{equation}
+Proof:
+To prove Eq.(1),we distinguish good and bad key with respect to $\tau$, and finally analyze the probability of the good key to get the advantage of this construction.\\
+First, we classify $\phi_{i}$, suppose that the quantity of $\phi^{(i)}$ is $\alpha$.\\
+$\mathcal{Q}_{1}={(\phi^{(1)},X_{11}[1,4n],X_{71}[1,4n]),\dots,(\phi^{(1)},X_{1q_{1}}[1,4n],X_{7q_{1}}[1,4n])}$ which has $q_{1}$ different input totally.\\
+$\mathcal{Q}_{2}={(\phi^{(2)},X_{12}[1,3n],X_{72}[1,4n]),\dots,(\phi^{(2)},X_{1q_{2}}[1,4n],X_{7q_{2}}[1,4n])}$    which has $q_{2}$ different input totally.\\
+\quad \quad $\vdots$ \\
+$\mathcal{Q}_{\alpha}={(\phi^{(\alpha)},X_{1\alpha}[1,4n],X_{7\alpha}[1,4n]),\dots,(\phi^{(\alpha)},X_{1q_{\alpha}}[1,4n],X_{7q_{\alpha}}[1,4n])}$ which has $q_{\alpha}$ different input totally.\\
+Suppose that there are $\alpha$ $\phi^{(i)}$ which can derive $\beta$ different $\mathcal{K}_{1}$: $\mathcal{K}_{1}^{(1)}$, $\mathcal{K}_{1}^{(2)}$, $\dots$,$\mathcal{K}_{1}^{(\beta)}$$(\beta\leq \alpha)$.\\
+Suppose that q Related-Key Oracle query constitute of $q_{1}^{\ast} \dots q_{\beta}^{\ast}$ inputs separately in $\beta$ different $\mathcal{K}_{1}$.\\
+Bad Keys are now defined as follows.\\
+\textbf{Definition 1}: $\mathcal{K}_{1}^{bad}$  for 6 Rounds
+with respect to $\tau$, $\mathcal{K}_{1}$  is {\it bad}, if the following conditions is fulfilled\\
+(B-1)there exists $i$ and $j$ such that $X_{4,i}[1,n]$ =$X_{4,j}[1,n],(i\neq j)$\\
+(B-2)there exists $i$ and $j$ such that $X_{4,i}[1,n]$ =$X_{2,j}[1,n]$\\
+(B-3)there exists $i$ and $j$ such that $X_{4,i}[1,n]$ =$X_{6,j}[1,n]$\\
+Otherwise we say $\mathcal{K}_{1}$ is {\it good}.\\
+\textbf{Definition 2}: $\mathcal{K}_{2}^{bad}$  for 6 Rounds
+with respect to $\tau$, $\mathcal{K}_{2}$  is {\it bad}, if the following conditions is fulfilled \\
+(B-1)there exists $i$ and $j$ such that $X_{3,i}[1,n]$ =$X_{3,j}[1,n],(i\neq j)$\\
+(B-2)there exists $i$ and $j$ such that $X_{3,i}[1,n]$ =$X_{1,j}[1,n]$\\
+(B-3)there exists $i$ and $j$ such that $X_{3,i}[1,n]$ =$X_{5,j}[1,n]$\\
+(B-4)there exists $i$ and $j$ such that $X_{3,i}[1,n]$ =$X_{2,j}[1,n]$\\
+(B-5)there exists $i$ and $j$ such that $X_{3,i}[1,n]$ =$X_{4,j}[1,n]$\\
+(B-6)there exists $i$ and $j$ such that $X_{3,i}[1,n]$ =$X_{6,j}[1,n]$\\
+Otherwise we say $\mathcal{K}_{2}$ is {\it good}.\\
+For $\mathcal{K}_{1}^{bad}$,we can get the probability:\\
+$\Pr[\mathcal{K}_{1}^{bad}]\leq (\frac{3}{2^{n}})q^{2}$\\
+For $\mathcal{K}_{2}^{bad}$,we can get the probability:\\
+$\Pr[\mathcal{K}_{2}^{bad}]\leq (\frac{6}{2^{n}})q^{2}$\\
+Lowering Bounding the Probability for Good Keys\\
+We now lower bound the probability for good keys.\\
+$\Pr_{re}[\tau]=(1-\Pr[\mathcal{K}_{1}^{bad}])(\frac{1}{2^{n}})^{3q}\times(1-\Pr[\mathcal{K}_{2}^{bad}])$\\
+\begin{align*}
+\frac{\Pr_{re}(\tau)}{\Pr_{id}(\tau)}&= (1-\Pr[\mathcal{K}_{1}^{bad}])\times(\frac{1}{2^{n}})^{q}\times(1-\frac{1}{2^{2n}})^{q}\times
+(1-\Pr[\mathcal{K}_{2}^{bad}]) / \prod_{i=0}^{\alpha}\frac{1}{(2^{3n})_{q_{i}}}\\
+&\geq (1-\frac{3q^{2}}{2^{n}})\times(1-\frac{6q^{2}}{2^{n}})\times(\frac{1}{2^{n}})^{3q}\times(2^{3n}-q)^{q}\\
+&\geq(1-\frac{9q^{2}}{2^{n}})(1-\frac{q^{2}}{2^{3n}})\\
+&\geq 1-(\frac{9q^{2}}{2^{n}}+\frac{q^{2}}{2^{3n}})
+\end{align*}
+So if $q \ll 2^{\frac{n}{2}}$,we can get this construction is CCA-security.\\
+\\
+\\
+\\
+
+
+\end{document}
